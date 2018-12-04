@@ -21,10 +21,9 @@ exports.onImageUpload = functions.storage.bucket("cloud-functions-basics.appspot
     console.log(event);
 
     // getting the file attributes
-
-    const fileBucket = object.bucket;
-    const objContentType = object.ContentType;
-    const filePath = object.filePath;
+    const fileBucket = event.bucket;
+    const contentType = event.ContentType;
+    const filePath = event.filePath;
     console.log('file changes detected!');
 
     // downloading the file & re-uploading after modification
