@@ -1,2 +1,3 @@
-# Firebase-cloud-functions
-Basic firebase cloud functions
+# Firebase cloud-functions
+Basic cloud functions using Firebase Http, cloud storage and realtime database event sources. 
+
