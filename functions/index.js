@@ -1,13 +1,13 @@
 const os = require('os');
 const path = require('path');
 const functions = require('firebase-functions');
-const gcs = require('@google-cloud/storage');
+const { Storage } = require('@google-cloud/storage');
 
 // config
-// const storage = new Storage({
-//      projectId: '', 
-//      keyFilename: ''
-// });
+const gcs = new Storage({
+     projectId: '', 
+     keyFilename: ''
+});
 
 // // Create and Deploy Your First Cloud Functions
 // // https://firebase.google.com/docs/functions/write-firebase-functions
@@ -35,9 +35,7 @@ exports.onImageUpload = functions.storage.bucket("cloud-functions-basics.appspot
     };
 
     return destBucket.file(filePath).download({
-        destination : tmpFilePath, 
-    }).then(() => {
-        console.log("Image downloaded to the local destination");
+        destination : tmpFilePath,
     }).then(() => {
         destBucket.file(filePath).upload({
             destination: "renamed-" + path.basename(filePath), 
