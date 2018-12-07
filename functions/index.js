@@ -90,7 +90,20 @@ exports.uploadFile = functions.https.onRequest((req, res) => {
             });
           });
       });
-      
+
       busboy.end(req.rawBody);
     });
-  });
+});
+
+// realtime database trigger
+exports.insertData = functions.database.ref('/TestMessage/{id}').onCreate(event => {
+    const data = event.data.val();
+    
+    const newMessage = {
+        message: event.params.id + '-' + data.message.toUpperCase()
+    };
+
+    return event.data.ref.child('upperCased').set(newMessage);
+});
+
+
